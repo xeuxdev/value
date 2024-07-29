@@ -20,15 +20,14 @@ module.exports = {
       colors: {
         border: "hsl(var(--border))",
         background: "hsl(var(--background))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-        },
+        primary: "hsl(var(--primary))",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
           text: "hsl(var(--muted-text))",
+          bg: "hsl(var(--muted-bg))",
         },
         subtle: {
           DEFAULT: "hsl(var(--subtle))",
@@ -55,6 +54,11 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
