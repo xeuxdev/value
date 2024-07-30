@@ -41,8 +41,8 @@ export function WhyUsSection() {
           </h3>
         </div>
 
-        <ScrollArea className="w-full mt-20 ">
-          <div className="flex w-max space-x-4 p-4">
+        <ScrollArea className="w-full h-full mt-20 ">
+          <div className="flex w-max space-x-4 px-4 ml-auto lg:mx-auto">
             {reasons.map((reason) => (
               <div
                 className="min-h-[22.1875rem] w-full max-w-[19.25rem] rounded-lg gradient-box-2 relative"
@@ -70,8 +70,8 @@ export function WhyUsSection() {
 
       <div className="flex flex-col lg:flex-row justify-center gap-20 lg:gap-36 px-5">
         {/* texts */}
-        <div className="space-y-20 max-w-[28.125rem]">
-          <div className="flex items-center text-xs max-[1024px]:justify-center gap-5 md:gap-14 *:font-poppins *:font-bold *:lg:text-lg *:uppercase">
+        <div className="space-y-20 max-w-[28.125rem] mx-auto lg:mx-0">
+          <div className="flex items-center text-xs max-md:justify-center gap-5 md:gap-14 *:font-poppins *:font-bold *:lg:text-lg *:uppercase">
             <p>Funding Allocation</p>
             <p>Token Allocation</p>
           </div>
@@ -99,9 +99,13 @@ export function WhyUsSection() {
         {/* illustrations */}
 
         <div className="relative">
-          <img src={PhoneInHandsImg} alt="phone hands" className="w-full " />
-          <Icons.world2 className="absolute -z-10 -top-14 right-0 lg:right-32 w-[11.75rem] h-[11.75rem] " />
-          <Icons.boomerang className="absolute -z-10 -bottom-3 lg:bottom-16 right-0 lg:right-10 w-full lg:w-[30rem] h-[20.625rem] " />
+          <img
+            src={PhoneInHandsImg}
+            alt="phone hands"
+            className="w-full max-h-[30.3125rem] min-[500px]:w-[22rem] min-[500px]:mx-auto lg:mx-0 lg:w-full h-full"
+          />
+          <Icons.world2 className="absolute -z-10 -top-14 right-0 md:right-60 lg:right-32 w-[11.75rem] h-[11.75rem] " />
+          <Icons.boomerang className="absolute -z-10 -bottom-3 sm:bottom-9 sm:right-32 md:right-56 lg:bottom-16 right-0 lg:right-0 w-full sm:w-[25rem] sm:h-56 lg:w-[30rem] h-[20.625rem] " />
         </div>
       </div>
     </section>

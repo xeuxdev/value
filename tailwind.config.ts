@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -18,22 +16,22 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        background: "hsl(var(--background))",
-        primary: "hsl(var(--primary))",
+        border: "hsla(var(--border))",
+        background: "hsla(var(--background))",
+        primary: "hsla(var(--primary))",
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "hsla(var(--secondary))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          text: "hsl(var(--muted-text))",
-          bg: "hsl(var(--muted-bg))",
+          DEFAULT: "hsla(var(--muted))",
+          text: "hsla(var(--muted-text))",
+          bg: "hsla(var(--muted-bg))",
         },
         subtle: {
-          DEFAULT: "hsl(var(--subtle))",
+          DEFAULT: "hsla(var(--subtle))",
         },
         "btn-text": {
-          DEFAULT: "hsl(var(--btn-text))",
+          DEFAULT: "hsla(var(--btn-text))",
         },
       },
       borderRadius: {

@@ -5,7 +5,7 @@ export function CTASection() {
   return (
     <section
       id="cta"
-      className="py-28 max-w-7xl mx-auto px-5 xl:px-52 relative"
+      className="py-28 max-w-7xl mx-auto px-5 lg:px-52 relative"
     >
       <div className="w-full rounded-3xl pt-11 pb-10 px-5 md:px-10 lg:px-16 flex items-center flex-col gap-10  gradient-box relative">
         <Icons.personMale />

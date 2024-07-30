@@ -9,10 +9,10 @@ export function Header() {
 
   return (
     <header className="mx-auto px-5 max-w-7xl pt-10">
-      <nav className="flex w-full items-center justify-between">
+      <nav className="flex w-full items-center justify-between relative">
         <a
           href="/"
-          className="font-poppins font-normal text-lg md:text-2xl tracking-[5px]"
+          className="font-poppins font-normal text-lg md:text-2xl tracking-[5.5px]"
         >
           VALUE
         </a>

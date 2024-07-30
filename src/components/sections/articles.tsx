@@ -35,57 +35,61 @@ const blogs = [
 ];
 
 export function ArticlesSection() {
-  const scrollAreaRef = React.useRef<HTMLDivElement>(null);
-  const [isAtStart, setIsAtStart] = React.useState(true);
-  const [isAtEnd, setIsAtEnd] = React.useState(false);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [translateX, setTranslateX] = React.useState(0);
+  const [isDisabled, setIsDisabled] = React.useState("left");
 
   const handleScroll = (direction: "left" | "right") => {
-    if (scrollAreaRef.current) {
-      const scrollAmount = 300; // Adjust based on your needs
-      if (direction === "left") {
-        scrollAreaRef.current.scrollBy({
-          left: -scrollAmount,
-          behavior: "smooth",
-        });
-      } else {
-        scrollAreaRef.current.scrollBy({
-          left: scrollAmount,
-          behavior: "smooth",
-        });
+    const scrollArea = scrollRef.current;
+
+    if (!scrollArea) {
+      return;
+    }
+
+    const scrollAreaWidth = scrollArea.getBoundingClientRect().width;
+    const scrollNum = Math.floor(scrollAreaWidth / 300);
+
+    if (direction === "left") {
+      const newTranslateX = translateX + scrollAreaWidth / scrollNum;
+
+      if (newTranslateX > scrollAreaWidth - 300) {
+        setIsDisabled("right");
+        return;
       }
+
+      setTranslateX(newTranslateX);
+      scrollRef.current.style.transform = `translateX(-${newTranslateX}px)`;
+    } else if (direction === "right") {
+      const newTranslateX = translateX - scrollAreaWidth / scrollNum;
+
+      if (newTranslateX == -(scrollAreaWidth / scrollNum)) {
+        setIsDisabled("left");
+        return;
+      }
+
+      setTranslateX(newTranslateX);
+      scrollRef.current.style.transform = `translateX(-${newTranslateX}px)`;
     }
   };
 
   React.useEffect(() => {
-    const handleScrollEvent = () => {
-      if (scrollAreaRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollAreaRef.current;
-        setIsAtStart(scrollLeft === 0);
-        setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
-      }
-    };
-
-    const scrollArea = scrollAreaRef.current;
-    if (scrollArea) {
-      scrollArea.addEventListener("scroll", handleScrollEvent);
+    if (translateX > 0) {
+      setIsDisabled("");
     }
-    return () => {
-      if (scrollArea) {
-        scrollArea.removeEventListener("scroll", handleScrollEvent);
-      }
-    };
-  }, []);
+  }, [translateX]);
 
   return (
     <section id="articles" className="pb-[7.5rem]">
       {/* banner */}
-      <div className="flex h-14 w-full items-center justify-between px-5 max-w-7xl xl:pl-20 mx-auto py-20">
-        <p className="font-poppins font-normal text-lg ">Content Articles</p>
-        <Icons.arrowRight className="w-7 h-5 text-secondary fill-secondary" />
+      <div className="h-14 w-full border-y border-primary my-20 ">
+        <div className="max-w-7xl mx-auto flex h-full w-full items-center px-5 xl:pl-20 justify-between">
+          <p className="font-poppins font-normal text-lg">Content Articles</p>
+          <Icons.arrowRight className="w-7 h-5 text-secondary fill-secondary" />
+        </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-12 xl:gap-20 2xl:gap-24 max-w-7xl ml-auto mr-0 relative">
-        <div className="px-5 xl:pr-0 w-full max-w-[27.75rem]">
+        <div className="px-5 xl:px-0 w-full max-w-[27.75rem]">
           <div className="flex items-center gap-4 mb-8 lg:mb-10">
             <div className="w-24 bg-secondary border border-secondary" />
             <p className="font-poppins font-bold text-sm md:text-base tracking-[1.35px] uppercase">
@@ -101,18 +105,26 @@ export function ArticlesSection() {
           <div className="flex items-center gap-5">
             <Button
               variant={"ghost"}
-              className=" bg-muted-bg rounded-full w-14 h-14 md:h-[4.375rem]  md:w-[4.375rem]"
-              onClick={() => handleScroll("left")}
-              disabled={isAtStart}
+              className={`${
+                isDisabled == "left"
+                  ? "bg-muted-bg text-gray-400"
+                  : "bg-transparent border-border border-2 text-primary"
+              } rounded-full w-14 h-14 md:h-[4.375rem]  md:w-[4.375rem]`}
+              onClick={() => handleScroll("right")}
+              disabled={isDisabled === "left"}
             >
-              <Icons.arrowLeft className="w-7 h-5 text-gray-400" />
+              <Icons.arrowLeft className="w-7 h-5" />
             </Button>
 
             <Button
-              variant={"outline"}
-              className="rounded-full w-14 h-14 md:h-[4.375rem]  md:w-[4.375rem]"
-              onClick={() => handleScroll("right")}
-              disabled={isAtEnd}
+              variant={"ghost"}
+              className={`${
+                isDisabled == "right"
+                  ? "bg-muted-bg text-gray-400"
+                  : "bg-transparent border-border border-2 text-primary"
+              } rounded-full w-14 h-14 md:h-[4.375rem]  md:w-[4.375rem]`}
+              onClick={() => handleScroll("left")}
+              disabled={isDisabled === "right"}
             >
               <Icons.arrowRight className="w-7 h-5" />
             </Button>
@@ -120,7 +132,10 @@ export function ArticlesSection() {
         </div>
 
         <ScrollArea className="w-full">
-          <div className="flex px-5 gap-8">
+          <div
+            className="flex px-5 gap-8 transition-all duration-300"
+            ref={scrollRef}
+          >
             {blogs.map((blog, index) => (
               <div
                 className="rounded-3xl w-80 md:w-[24.25rem] min-h-[29.5rem] px-6 md:px-9 py-6  relative gradient-box space-y-9 "

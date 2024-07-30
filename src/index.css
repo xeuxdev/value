@@ -27,9 +27,9 @@
 }
 
 .outlined-text {
-  color: transparent;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: hsl(var(--primary));
+  color: hsl(var(--background));
+  text-shadow: 2px 2px 1px hsl(var(--primary)), -2px 2px 1px hsl(var(--primary)),
+    -2px -2px 0 hsl(var(--primary)), 2px -2px 0 hsl(var(--primary));
 }
 
 .gradient-box {
@@ -78,6 +78,10 @@
     rgba(255, 254, 0, 0.3) 0%,
     rgba(152, 150, 20, 0.3) 100%
   );
+}
+
+.btn-grad {
+  background: linear-gradient(270deg, #ffff05 0%, rgba(217, 217, 217, 0) 100%);
 }
 
 .hide-scroll::-webkit-scrollbar {
