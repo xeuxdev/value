@@ -89,7 +89,7 @@ export function ArticlesSection() {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-12 xl:gap-20 2xl:gap-24 max-w-7xl ml-auto mr-0 relative">
-        <div className="px-5 xl:px-0 w-full max-w-[27.75rem]">
+        <div className="px-5 2xl:px-0 w-full max-w-[27.75rem]">
           <div className="flex items-center gap-4 mb-8 lg:mb-10">
             <div className="w-24 bg-secondary border border-secondary" />
             <p className="font-poppins font-bold text-sm md:text-base tracking-[1.35px] uppercase">
@@ -133,7 +133,7 @@ export function ArticlesSection() {
 
         <ScrollArea className="w-full">
           <div
-            className="flex px-5 gap-8 transition-all duration-300"
+            className="flex px-5 py-4 gap-8 transition-all duration-300"
             ref={scrollRef}
           >
             {blogs.map((blog, index) => (
