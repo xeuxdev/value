@@ -1,8 +1,7 @@
 import React from "react";
+import ArticleCard from "../cards/article-card";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
-import ArticleCard from "../cards/article-card";
 
 const blogs = [
   {
@@ -39,45 +38,57 @@ export function ArticlesSection() {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [translateX, setTranslateX] = React.useState(0);
   const [isDisabled, setIsDisabled] = React.useState("left");
+  const [scrollWidth, setScrollWidth] = React.useState(0);
 
   const handleScroll = (direction: "left" | "right") => {
     const scrollArea = scrollRef.current;
-
-    if (!scrollArea) {
-      return;
-    }
-
-    const scrollAreaWidth = scrollArea.getBoundingClientRect().width;
-    const scrollNum = Math.floor(scrollAreaWidth / 300);
+    const currentScroll = scrollArea?.scrollLeft;
 
     if (direction === "left") {
-      const newTranslateX = translateX + scrollAreaWidth / scrollNum;
-
-      if (newTranslateX > scrollAreaWidth - 300) {
-        setIsDisabled("right");
-        return;
-      }
-
-      setTranslateX(newTranslateX);
-      scrollRef.current.style.transform = `translateX(-${newTranslateX}px)`;
+      setTranslateX(currentScroll! + 300);
     } else if (direction === "right") {
-      const newTranslateX = translateX - scrollAreaWidth / scrollNum;
+      setTranslateX(currentScroll! - 300);
+    }
+  };
 
-      if (newTranslateX == -(scrollAreaWidth / scrollNum)) {
-        setIsDisabled("left");
-        return;
-      }
-
-      setTranslateX(newTranslateX);
-      scrollRef.current.style.transform = `translateX(-${newTranslateX}px)`;
+  const setDisabledStates = (currentPos: number, maxPos: number) => {
+    if (currentPos! > 0 && currentPos! < maxPos) {
+      setIsDisabled("");
+    } else if (currentPos! >= maxPos) {
+      setIsDisabled("right");
+    } else {
+      setIsDisabled("left");
     }
   };
 
   React.useEffect(() => {
-    if (translateX > 0) {
-      setIsDisabled("");
+    const scrollAreaWidth = scrollRef.current?.clientWidth;
+
+    if (scrollAreaWidth) {
+      setScrollWidth(scrollAreaWidth);
     }
-  }, [translateX]);
+  }, []);
+
+  React.useEffect(() => {
+    scrollRef.current?.scrollTo({
+      left: translateX,
+      behavior: "smooth",
+    });
+    setDisabledStates(translateX, scrollWidth);
+  }, [translateX, scrollWidth]);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = scrollRef.current?.scrollLeft;
+      setDisabledStates(scrollPos!, scrollWidth);
+    };
+
+    const element = scrollRef.current;
+
+    element?.addEventListener("scroll", handleScroll);
+
+    return () => element?.removeEventListener("scroll", handleScroll);
+  }, [scrollWidth, translateX]);
 
   return (
     <section id="articles" className="pb-[7.5rem]">
@@ -89,7 +100,7 @@ export function ArticlesSection() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-12 xl:gap-20 2xl:gap-24 max-w-7xl ml-auto mr-0 relative">
+      <div className="flex flex-col lg:flex-row gap-12 xl:gap-20 2xl:gap-24 max-w-7xl ml-auto mr-0 2xl:mx-auto relative overflow-hidden">
         <div className="px-5 2xl:px-0 w-full max-w-[27.75rem]">
           <div className="flex items-center gap-4 mb-8 lg:mb-10">
             <div className="w-24 bg-secondary border border-secondary" />
@@ -132,18 +143,14 @@ export function ArticlesSection() {
           </div>
         </div>
 
-        <ScrollArea className="w-full">
-          <div
-            className="flex px-5 py-4 gap-8 transition-all duration-300"
-            ref={scrollRef}
-          >
-            {blogs.map((blog, index) => (
-              <ArticleCard {...blog} key={index} />
-            ))}
-          </div>
-
-          <ScrollBar orientation="horizontal" className="pt-3" />
-        </ScrollArea>
+        <div
+          className="w-full max-w-[46.5rem]  overflow-x-scroll flex px-5 py-4 gap-8 transition-all duration-300 hide-scroll"
+          ref={scrollRef}
+        >
+          {blogs.map((blog, index) => (
+            <ArticleCard {...blog} key={index} />
+          ))}
+        </div>
 
         <Icons.world2 className="absolute -bottom-20 left-[40%] w-32 h-32 -z-10" />
       </div>

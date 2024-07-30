@@ -54,8 +54,8 @@ export function WhyUsSection() {
 
       <div className="flex flex-col lg:flex-row justify-center gap-20 lg:gap-36 px-5">
         {/* texts */}
-        <div className="space-y-20 max-w-[28.125rem] mx-auto lg:mx-0">
-          <div className="flex items-center text-xs max-md:justify-center gap-5 md:gap-14 *:font-poppins *:font-bold *:lg:text-lg *:uppercase">
+        <div className="space-y-10 md:space-y-20 max-w-[28.125rem] mx-auto lg:mx-0">
+          <div className="flex items-center text-xs gap-5 md:gap-14 *:font-poppins *:font-bold *:lg:text-lg *:uppercase">
             <p>Funding Allocation</p>
             <p>Token Allocation</p>
           </div>

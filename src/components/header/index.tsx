@@ -21,7 +21,7 @@ export function Header() {
 
         <div className="lg:flex items-center gap-5 hidden">
           <Button variant={"ghost"}>sign in</Button>
-          <Button variant={"outline"} className="px-11 py-3">
+          <Button variant={"outline"} className="px-10 py-3">
             sign up
           </Button>
         </div>
