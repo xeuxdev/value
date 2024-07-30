@@ -2,6 +2,7 @@ import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import PhoneInHandsImg from "../../assets/hands.png";
+import WhyUsCard from "../cards/why-us-card";
 
 const reasons = [
   {
@@ -44,24 +45,7 @@ export function WhyUsSection() {
         <ScrollArea className="w-full h-full mt-20 ">
           <div className="flex w-max space-x-4 px-4 ml-auto lg:mx-auto">
             {reasons.map((reason) => (
-              <div
-                className="min-h-[22.1875rem] w-full max-w-[19.25rem] rounded-lg gradient-box-2 relative"
-                key={reason.title}
-              >
-                <div className="flex flex-col px-11 py-[3.75rem] space-y-7">
-                  <div className="w-20 h-20 rounded-full border-4 border-[#FFFFFF0F] bg-[#FFFFFF12] grid place-items-center ">
-                    <reason.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <div className="text-white text-left space-y-6 font-poppins">
-                    <p className="text-base lg:text-xl font-medium">
-                      {reason.title}
-                    </p>
-                    <p className="text-xs font-normal text-subtle lg:text-base">
-                      {reason.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <WhyUsCard {...reason} key={reason.title} />
             ))}
           </div>
           <ScrollBar orientation="horizontal" className="pt-5" />

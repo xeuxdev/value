@@ -11,6 +11,7 @@ export default function App() {
   return (
     <>
       <Header />
+
       <main className="pt-24 lg:pt-14">
         <HeroSection />
         <About />
