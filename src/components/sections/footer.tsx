@@ -84,6 +84,12 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      <div className="py-5 bg-background text-center">
+        <p className="text-primary text-xs md:text-sm">
+          Ⓒ 2023 All rights reserved. This is Your Company
+        </p>
+      </div>
     </footer>
   );
 }

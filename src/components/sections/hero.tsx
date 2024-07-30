@@ -54,17 +54,17 @@ export function HeroSection() {
               className="relative hover:bg-secondary/80 px-8 py-4 group"
             >
               GET STARTED
-              <div className="w-16 h-16 btn-grad absolute top-1/2 -translate-y-1/2 left-2 invisible group-hover:visible group-hover:translate-x-10 md:left-auto md:right-2 -z-10 group-hover:z-10" />
-              <div className="absolute  top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 md:group-hover:w-20 md:group-hover:h-20 transition-all duration-300 transform bg-secondary rounded-full right-0 group-hover:translate-x-24 -z-10 group-hover:z-20">
+              <div className="h-12 md:w-12 w-10 md:h-16 btn-grad absolute top-1/2 -translate-y-1/2 invisible group-hover:visible group-hover:translate-x-7 md:group-hover:translate-x-10 left-auto right-2 -z-10 group-hover:z-10" />
+              <div className="absolute top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12  group-hover:w-14 group-hover:h-14 md:group-hover:w-20 md:group-hover:h-20 transition-all duration-300 transform bg-secondary rounded-full right-0 group-hover:translate-x-16 md:group-hover:translate-x-24 -z-10 group-hover:z-20">
                 <Icons.arrowRight />
               </div>
             </Button>
           </div>
 
-          <div className="font-poppins font-bold outlined-text opacity-15 text-7xl lg:text-[231px] absolute bottom-20 lg:-bottom-20 -right-24 lg:-right-[250px] lg:leading-[346px]">
+          <div className="font-poppins font-bold outlined-text opacity-15 text-7xl lg:text-[231px] absolute bottom-20 lg:-bottom-20 -right-24 lg:-right-[250px] lg:leading-[346px] -z-10">
             VALUE
           </div>
-          <div className="font-poppins font-bold outlined-text opacity-15 text-7xl lg:text-[231px] absolute bottom-0 lg:-bottom-[200px] -left-32 lg:-left-[440px] lg:leading-[346px]">
+          <div className="font-poppins font-bold outlined-text opacity-15 text-7xl lg:text-[231px] absolute bottom-0 lg:-bottom-[200px] -left-32 lg:-left-[440px] lg:leading-[346px] -z-10">
             VALUE
           </div>
         </div>
